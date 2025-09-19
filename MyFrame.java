@@ -12,14 +12,15 @@ public class MyFrame extends JFrame implements MouseListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(500,500);
         this.setLayout(null);
+        this.addMouseListener(this);
 
-        this.clickCounter = new JLabel();
+        this.clickCounter = new JLabel(String.format("Number of clicks: %d", clickCounterNum));
         clickCounter.setBounds(0, 0, 250, 100);
         clickCounter.setBackground(Color.LIGHT_GRAY);
         clickCounter.setOpaque(true);
 
         this.mousePresent = new JLabel();
-        mousePresent.setBounds(0, 100, 250, 100);
+        mousePresent.setBounds(0, 100, 400, 100);
         mousePresent.setBackground(Color.orange);
         mousePresent.setOpaque(true);
 
@@ -35,7 +36,9 @@ public class MyFrame extends JFrame implements MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        System.out.println("mouse clicked!");
+        clickCounterNum++;
+        clickCounter.setText("Number of clicks: "+clickCounterNum);
     }
 
     @Override
@@ -50,11 +53,15 @@ public class MyFrame extends JFrame implements MouseListener{
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        isMousePresent = true;
+        mousePresent.setText("Squeak squeak!");
+        mousePresent.setBackground(Color.lightGray);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        isMousePresent = false;
+        mousePresent.setBackground(Color.orange);
+        mousePresent.setText("Weird how there's a block of cheese just sitting here...");
     }
 }
