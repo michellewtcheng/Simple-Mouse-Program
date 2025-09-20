@@ -1,4 +1,4 @@
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -7,6 +7,7 @@ public class MyFrame extends JFrame implements MouseListener{
     int clickCounterNum, mouseLocX, mouseLocY;
     boolean isMousePresent;
     JLabel clickCounter, mousePresent;
+    ImageIcon cheese, mouse;
 
     public MyFrame(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -14,13 +15,20 @@ public class MyFrame extends JFrame implements MouseListener{
         this.setLayout(null);
         this.addMouseListener(this);
 
+        this.cheese = new ImageIcon("/images/cheese_small.png");
+
+        this.mouse = new ImageIcon("/images/rat_small.png");
+
         this.clickCounter = new JLabel(String.format("Number of clicks: %d", clickCounterNum));
-        clickCounter.setBounds(0, 0, 250, 100);
+//        clickCounter.setFont(new Font("Sans Serif", Font.PLAIN, 20));
+        clickCounter.setHorizontalAlignment(SwingConstants.CENTER);
+        clickCounter.setBounds(0, 0, 200, 50);
         clickCounter.setBackground(Color.LIGHT_GRAY);
         clickCounter.setOpaque(true);
 
-        this.mousePresent = new JLabel();
-        mousePresent.setBounds(0, 100, 400, 100);
+        this.mousePresent = new JLabel("Weird how there's a block of cheese just sitting here... 🧀", cheese, SwingConstants.CENTER);
+        //image currently not showing...
+        mousePresent.setBounds(0, 250, 500, 250);
         mousePresent.setBackground(Color.orange);
         mousePresent.setOpaque(true);
 
@@ -54,7 +62,7 @@ public class MyFrame extends JFrame implements MouseListener{
     @Override
     public void mouseEntered(MouseEvent e) {
         isMousePresent = true;
-        mousePresent.setText("Squeak squeak!");
+        mousePresent.setText("Squeak squeak! 🐭");
         mousePresent.setBackground(Color.lightGray);
     }
 
@@ -62,6 +70,6 @@ public class MyFrame extends JFrame implements MouseListener{
     public void mouseExited(MouseEvent e) {
         isMousePresent = false;
         mousePresent.setBackground(Color.orange);
-        mousePresent.setText("Weird how there's a block of cheese just sitting here...");
+        mousePresent.setText("Weird how there's a block of cheese just sitting here... 🧀");
     }
 }
