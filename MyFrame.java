@@ -1,13 +1,12 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import javax.swing.*;
 
 public class MyFrame extends JFrame implements MouseListener{
 
     int clickCounterNum, mouseLocX, mouseLocY;
     boolean isMousePresent;
-    JLabel clickCounter, mousePresent, mousePresentImage;
+    JLabel clickCounter, mousePresent;
     ImageIcon cheeseImage, mouseImage;
 
     public MyFrame(){
@@ -23,10 +22,6 @@ public class MyFrame extends JFrame implements MouseListener{
         // load images
         this.cheeseImage = new ImageIcon("images/cheese_small.png");
         this.mouseImage = new ImageIcon("images/rat_small.png");
-
-//        this.mousePresentImage = new JLabel("Cheese image", cheeseImage, JLabel.CENTER);
-//        this.mousePresentImage.setIcon(cheeseImage);
-//        this.mousePresentImage.setBounds(250, 250, 200, 200);
 
         // Click counter
         this.clickCounter = new JLabel(String.format("Number of clicks: %d", clickCounterNum));
@@ -45,8 +40,6 @@ public class MyFrame extends JFrame implements MouseListener{
         // add components
         this.add(clickCounter);
         this.add(mousePresent);
-//        this.add(mousePresentImage);
-
         this.addMouseListener(this);
         this.setVisible(true);
     }
@@ -75,7 +68,6 @@ public class MyFrame extends JFrame implements MouseListener{
         mousePresent.setText("Squeak squeak! 🐭");
         mousePresent.setBackground(Color.lightGray);
         mousePresent.setIcon(mouseImage);
-//        mousePresentImage.setIcon(mouseImage);
     }
 
     @Override
@@ -84,6 +76,5 @@ public class MyFrame extends JFrame implements MouseListener{
         mousePresent.setBackground(Color.orange);
         mousePresent.setText("Weird how there's a block of cheese just sitting here...");
         mousePresent.setIcon(cheeseImage);
-//        mousePresentImage.setIcon(mouseImage);
     }
 }
