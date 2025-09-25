@@ -2,12 +2,12 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class MyFrame extends JFrame implements MouseListener{
+public class MyFrame extends JFrame implements MouseListener, MouseMotionListener{
 
     int clickCounterNum, mouseLocX, mouseLocY;
-    boolean isMousePresent;
-    JLabel clickCounter, mousePresent;
+    JLabel clickCounter, mousePresent, mouseLoc;
     ImageIcon cheeseImage, mouseImage;
+    String cheeseText;
 
     public MyFrame(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -17,7 +17,7 @@ public class MyFrame extends JFrame implements MouseListener{
         this.clickCounterNum = 0;
         this.mouseLocX= 0;
         this.mouseLocY = 0;
-        this.isMousePresent = false;
+        this.cheeseText = "<html>Weird how there's a<br>block of cheese just sitting here...</html>";
 
         // load images
         this.cheeseImage = new ImageIcon("images/cheese_small.png");
@@ -26,28 +26,40 @@ public class MyFrame extends JFrame implements MouseListener{
         // Click counter
         this.clickCounter = new JLabel(String.format("Number of clicks: %d", clickCounterNum));
         clickCounter.setHorizontalAlignment(SwingConstants.CENTER);
-        clickCounter.setBounds(0, 0, 200, 50);
+        clickCounter.setBounds(0, 0, 500, 50);
         clickCounter.setBackground(Color.LIGHT_GRAY);
         clickCounter.setOpaque(true);
 
         // Mouse presence text
-        this.mousePresent = new JLabel("Weird how there's a block of cheese just sitting here...",
-                cheeseImage, JLabel.CENTER);
-        mousePresent.setBounds(0, 250, 500, 250);
+        this.mousePresent = new JLabel(cheeseText, cheeseImage, JLabel.CENTER);
+        mousePresent.setBounds(0, 200, 500, 300);
         mousePresent.setBackground(Color.orange);
         mousePresent.setOpaque(true);
+
+        // Mouse location text
+        this.mouseLoc = new JLabel("("+mouseLocX+", "+mouseLocY+")");
+        mouseLoc.setBounds(0, 50, 500, 150);
+        mouseLoc.setHorizontalAlignment(JLabel.CENTER);
+        mouseLoc.setBackground(Color.pink);
+        mouseLoc.setOpaque(true);
 
         // add components
         this.add(clickCounter);
         this.add(mousePresent);
+        this.add(mouseLoc);
         this.addMouseListener(this);
+        this.addMouseMotionListener(this);
         this.setVisible(true);
+    }
+
+    private void updateMouseLocation(MouseEvent e){
+        mouseLoc.setText("("+e.getX()+", "+e.getY()+")");
     }
 
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("mouse clicked!");
+//        System.out.println("mouse clicked!");
         clickCounterNum++;
         clickCounter.setText("Number of clicks: "+clickCounterNum);
     }
@@ -64,7 +76,6 @@ public class MyFrame extends JFrame implements MouseListener{
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        isMousePresent = true;
         mousePresent.setText("Squeak squeak! 🐭");
         mousePresent.setBackground(Color.lightGray);
         mousePresent.setIcon(mouseImage);
@@ -72,9 +83,18 @@ public class MyFrame extends JFrame implements MouseListener{
 
     @Override
     public void mouseExited(MouseEvent e) {
-        isMousePresent = false;
         mousePresent.setBackground(Color.orange);
-        mousePresent.setText("Weird how there's a block of cheese just sitting here...");
+        mousePresent.setText(cheeseText);
         mousePresent.setIcon(cheeseImage);
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        updateMouseLocation(e);
     }
 }
