@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import javax.swing.*;
 
 public class MyFrame extends JFrame implements MouseListener, MouseMotionListener{
@@ -20,8 +21,9 @@ public class MyFrame extends JFrame implements MouseListener, MouseMotionListene
         this.cheeseText = "<html>Weird how there's a<br>block of cheese just sitting here...</html>";
 
         // load images
-        this.cheeseImage = new ImageIcon("images/cheese_small.png");
-        this.mouseImage = new ImageIcon("images/rat_small.png");
+        System.out.println(new File("").getAbsolutePath());
+        this.cheeseImage = new ImageIcon(getClass().getResource("cheese_small.png"));
+        this.mouseImage = new ImageIcon(getClass().getResource("rat_small.png"));
 
         // Click counter
         this.clickCounter = new JLabel(String.format("Number of clicks: %d", clickCounterNum));

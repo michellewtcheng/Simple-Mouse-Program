@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Simple-Mouse-Program:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Simple_Mouse_Program_jar</output-path>
+    <root id="archive" name="Simple-Mouse-Program.jar">
+      <element id="module-output" name="Simple-Mouse-Program" />
+    </root>
+  </artifact>
+</component>
